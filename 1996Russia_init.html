@@ -15,6 +15,73 @@
  * 
  * By using, distributing, or modifying this mod, you agree to abide by the terms and conditions of both the Apache License 2.0 and the Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) license.
 */
+function addDynamicCSS() {
+  var css = `
+      .inner_window_question h3 .mytooltip{
+          background-color: lightskyblue;
+      }
+
+      .mytooltip {
+          position: relative;
+          display: inline-block;
+          cursor: pointer;
+          background-color: lightblue;
+      }
+
+      .mytooltip .mytooltiptext {
+          width: 240px;
+          background-color: lightblue;
+          color: black;
+          text-align: center;
+          border-radius: 6px;
+          padding: 10px;
+          position: absolute;
+          z-index: 99;
+          bottom: 20%;
+          left: 20%;
+          margin-left: -90px;
+          opacity: 0;
+          transition: opacity 0.3s;
+          border: 1px solid black;
+          pointer-events: none;
+          font-size: 13px !important;
+          line-height: 1.5em !important;
+          font-weight: normal !important;
+          font-style: normal !important;
+      }
+
+      .mytooltip .mytooltiptext img {
+          max-width: 240px;
+          height: auto;
+      }
+
+      .mytooltip:hover .mytooltiptext {
+          opacity: 1;
+          transition-delay: 0.5s;
+      }
+  `;
+
+  var styleElem = document.createElement('style');
+  styleElem.type = 'text/css';
+  
+  styleElem.appendChild(document.createTextNode(css));
+  
+  document.head.appendChild(styleElem);
+}
+
+
+addDynamicCSS();
+
+tooltipList = [
+  {searchString: "Yekaterinburg", explanationText: "Formerly known as Sverdlovsk. Still the administrative centre of the Sverdlovsk Oblast."},
+  {searchString: "Community of Sovereign Republics", explanationText: "Сообщество Суверенных Республик, “ССР”."},
+  {searchString: "Federation Council", explanationText: "The upper house of the bicameral national legislature of Russia, unofficially called the Senate."},
+  {searchString: "Duma", explanationText: "The State Duma is the lower house of the bicameral national legislature of Russia."},
+  {searchString: "Belovezha Accords", explanationText: "This agreement declared the dissolution of the USSR.The key signatories were Russian President Boris Yeltsin, Ukrainian President Leonid Kravchuk, and Belarusian Parliament Chairman Stanislav Shushkevich."},
+  {searchString: "IMF", explanationText: "International Monetary Fund."},
+];
+
+
 
 e=campaignTrail_temp
 if (!e.done) {
@@ -106,11 +173,9 @@ campaignTrail_temp.temp_election_list = [
     }
 ]
 
-//campaignTrail_temp.credits = "Kruglyasheo"
-
-campaignTrail_temp.credits = "<button onclick='credits()'>Credits</button>";
+campaignTrail_temp.credits = "<button onclick='credits()'>Kruglyasheo</button>";
 credits = function() {
-  credits = ["Coded, researched and written by", "Kruglyasheo", "", "Playtesters:",  "-", ""]
+  credits = ["Coded, researched and written by:", "Kruglyasheo", "", "Playtesters:",  "_mango", "mortifiednassau", ""]
   text = "CREDITS:\n\n"
   for (i in credits) {
       text += credits[i] + "\n"
